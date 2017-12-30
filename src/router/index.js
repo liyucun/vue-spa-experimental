@@ -6,7 +6,7 @@ import ProductPage from '@/pages/ProductPage'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -25,3 +25,15 @@ export default new Router({
     }
   ]
 })
+
+const getCookie = (name, path) => {
+  var m = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
+  return !m ? '' : unescape(m[2])
+}
+
+router.beforeEach((to, from, next) => {
+  console.log(getCookie('username'))
+  next()
+})
+
+export default router
